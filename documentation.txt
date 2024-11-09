@@ -1,0 +1,494 @@
+
+
+---------------------------------------------------
+chapter 1
+Django Web Development with Python Introduction 
+---------------------------------------------------
+
+
+https://www.youtube.com/watch?v=yD0_1DPmfKM&list=PLQVvvaa0QuDe9nqlirjacLkBYdgc2inh3
+
+Django Web Development with Python Introduction
+
+προ απαιτούμενο να εχουμε εγκατεστημενη τη python και να την εχουμε πρσθεσει στις μεταβλητες περιβαλλόντος
+μετα εγκαθιστούμε το vscode που είναι το text τοοl στο οποίο θα γράψουμε python
+
+vscode path
+C:\Users\user\AppData\Local\Programs\Microsoft VS Code
+
+μετα απο τη γραμμή εντολών εγκαθηστουμε τα εργαλεία της Python που θα στήσουν στο browser την εφαρμογη΄
+και απο εκει θα εκτελόυμε απο συγκεκριμένες θέσεις το αντίστοιχο python script/script  το οποίο θα μας 
+κάνει visualize το επιθημυτο αποτέλεσμα....
+
+
+η αρχική μας θέση ειναι η....
+
+C:\python\project
+
+όπου εδω θα μεταβούμε απο τη γραμμή εντολών και θα εκτελέσουμε τις ακόλουθες εντολές
+
+
+--------------------------------------------------
+Microsoft Windows [Version 10.0.19045.4894]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\user>cd C:\python\project
+
+C:\python\project>  pip install django
+
+-------------------------------------------------- εδω εγκαταστήσαμε το django ενα framework το οποίο θα μας στησει 
+                                                   ιντερνετικα την εφαρμογη......
+
+μετα θέλουμε να δημιουργήσουμε ενα project (οπου το spotting θα ειναι το όνομα του project)
+
+
+C:\python\project>  django-admin startproject spotting 
+
+
+αυτη η εντολη μας δημιουργει ενα φάκελο με το ονομα "spotting" οπου εκει υπάρχουν διαφορα αρχεια τα οποία δημιουργήθηκαν απο 
+το django και εκει θα δημιουργήσουμε ενα main project το οποία θα αντλει πληροφορίες απο το προτζεκτάκι μας...
+
+C:\python\project> cd spotting
+
+C:\python\project\spotting> py manage.py startapp main
+
+
+για να δούμε οτι παίζει η εφαρμογη μας τρεχουμε την εντολή 
+
+ C:\python\project\spotting> py manage.py runserver
+
+
+ και αν μας βγάλει το ακολουθο μηνυμα τότε ημαστε σε καλο δρόμο
+
+
+ -------------------------------------------------------------
+
+ Watching for file changes with StatReloader
+Performing system checks...
+
+System check identified no issues (0 silenced).
+
+You have 18 unapplied migration(s). Your project may not work properly until you apply the migrations for app(s): admin, auth, contenttypes, sessions.
+Run 'python manage.py migrate' to apply them.
+October 27, 2024 - 13:43:09
+Django version 5.1.2, using settings 'spotting.settings'
+Starting development server at http://127.0.0.1:8000/
+Quit the server with CTRL-BREAK.
+
+ -------------------------------------------------------------
+
+ κάνουμε αντιγραφη και επικολλήση το " http://127.0.0.1:8000/ " στο browser μας και βλέπουμε οτι η εφαρμογή μας παιζει....
+
+
+ τωρα αν παρατηρήσουμε λίγο πιο προσεκτικα θα δουμε το εξής....
+ μεσα στο spotting εχει δημιουργηθεί ενα folderaki με το ίδιο όνομα (C:\python\project\spotting\spotting) 
+ και εκεί βρίσκεται ενα αρχείο python (urls.py) αυτο το αντιγράφουμε και το επικολλάμε 
+
+ απο    C:\python\project\spotting\spotting
+ εδω    C:\python\project\spotting\main 
+
+
+
+τώρα πάμε στο " urls.py " του " C:\python\project\spotting\main  " για να πραγματοποιήσουμε κάποιες αλλαγές....
+
+αρχικα ήταν ετσι
+
+-----------------------------------------------------------
+
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+-----------------------------------------------------------
+
+και μετα ετσι...για να μπορεί να κάνει import  τα ολα (μέσω της .) views
+-----------------------------------------------------------
+
+from django.urls import path
+from . import views 
+
+app_name = "main"
+
+urlpatterns = [
+    path("", views.homepage, name="homepage"),
+]
+
+-----------------------------------------------------------
+
+μετα πάμε να κάνουμε αλλαγες στο αρχείο urls.py στη θέση...C:\python\project\spotting\spotting
+
+αρχικα ήταν ετσι
+
+-----------------------------------------------------------
+
+from django.contrib import admin
+from django.urls import path
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+-----------------------------------------------------------
+
+και μετα ετσι...για να μπορεί να κάνει include τα urls του "main"
+-----------------------------------------------------------
+
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('', include('main.urls')),
+    path('admin/', admin.site.urls),
+]
+
+-----------------------------------------------------------
+
+
+μετα πάμε στα views (C:\python\project\spotting\main) και γραφουμε και εκει κατι....
+
+
+αρχικα ήταν 'ετσι
+------------------------------------
+from django.shortcuts import render
+------------------------------------
+
+
+μετα 'ετσι
+------------------------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def homepage(request):
+    return HttpResponse("day 1")
+------------------------------------
+
+δηλαδη με λίγα λόγια τα urls.py της θέσης " C:\python\project\spotting\spotting " τραβάει το response 
+μέσω της εντολής " path("", views.homepage,name="homepage") "
+απο το αντιστοιχο path στα views.py 
+της θέσης " C:\python\project\spotting\main " μέσω της εντολής 
+"
+def homepage(request):
+    return HttpResponse("day 1")
+
+"
+
+
+τωρα παμε να ανεβασουμε στο github οτι κάναμε
+
+-------------------git hub upload commands-------------------
+
+
+C:\>git remote add origin
+'git' is not recognized as an internal or external command,
+operable program or batch file.
+
+πάμε εδω " https://git-scm.com/downloads/win "  για να κατεβάσουμε το git στο pc μας 
+θέση αποθηκευσης " C:\python " και θεση εγκαταστασης " C:\Program Files\Git "
+
+θελει λίγο διορθωσεις....
+
+
+
+
+-------------------git hub upload commands-------------------
+
+
+-------------------------------------------------
+chapter 2
+Models - Django Web Development with Python p.2
+-------------------------------------------------
+
+αυτο το κεφαλαιο ειναι κρισιμο καθως μασ δειχνει πςσ να φτιαξοθμε μια βαση δεδομενων στην εφαρμογη κια απο εκει να φορτωνουμε τις 
+html σελιδες μας....
+
+το πρωτο βημα  ειναι να παμε στα models.py αρχειο οπου αμα το φτιαξουμε σωστα θα μας βοηθησει αργοτερα με το navigation
+μεσα στην εφαρμογη 
+
+from django.db import models
+
+αυτο μας λεει οτι η εφαρμογη ειναι σε θεση να κανει inherrit opoiodhpote montelo απο το django
+εδω λοιπον θα παμε να φτιαξουμε μια νεα κλασση οποθ θα απεικονιστει παρακατω......
+
+---------------------------------------------------------
+from django.db import models
+
+# Create your models here.
+
+class Tutorial(models.Model):
+    tutorial_title = models.CharField(max_length=200)
+    tutorial_content = models.TextField()
+    tutorial_published = models.DateTimeField("date published")
+
+    def __str__(self):
+        return self.tutorial_title
+---------------------------------------------------------
+
+
+εδω λοιπον εχουμε το μοντελο μας και οποτε θελουμε μπορουμε να δημιουργησουμε ενα μοντελο 
+βασικα ενα μοντελο μπορει να χαρτογραφηθει σε ενα datbase table της βασης δεδομενων που ειναι 
+το αρχειο 
+" db.sqlite3 "
+στη θεση 
+" C:\Users\user\Documents\spotting\project\spotting_v1 "
+
+
+τωρα πρεπει να πραγματοποιησουμε την εντολη migration που ειναι για την απεικονιση του μοντελου που γραψαμε με κωδικα στη 
+βαση....και η εντολη αυτη πρεπει να εκτελειται καθε φορα που δημιουργουμε ενα μοντελο, μεταβαινουμε στη θεση 
+" C:\Users\user\Documents\spotting\project\spotting_v1 "
+και δινουμε την εντολη
+"  python manage.py makemigrations "
+και θα δουμε το πολλυ ωραιο "no changes detected" και αυτο συμβαινει επειδη δεν εχουμε κανει point out την εφαρμογη στα "settings.py"
+στη περιπτωση που θελουμε να χρησιμοποιησουμε τα μοντελα...και προσθετουμε το "  'main_v1.apps.MainV1Config', "
+στα installed apps
+
+
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'main_v1.apps.MainV1Config',
+]
+
+
+ μετα πρεπει να παμε στα " apps.py " στη  θεση " C:\Users\user\Documents\spotting\project\spotting_v1\main_v1  "
+ και να δουμε οτι οντως υπαρχει εγγραφως η " main_v1 " και η κλασση " MainV1Config "
+
+ τωρα αν ξαναδωσουμε την εντολη  "  python manage.py makemigrations " 
+ ισως να δουμε να πραγματοποιουνται καπποια migrations 
+
+
+------------------------------------------------------------------------------------
+C:\Users\user\Documents\spotting\project\spotting_v1>python manage.py makemigrations
+Migrations for 'main_v1':
+  main_v1\migrations\0001_initial.py
+    + Create model Tutorial
+------------------------------------------------------------------------------------
+
+
+Create model Tutorial.....μασ δινει τη πληροφορια οτι δημιουργηθηκε το μοντελο Tutorial στη βαση δεδομενων.
+τωρα δινουμε την επομενη εντολη " python manage.py migrate  "
+
+
+--------------------------------------------------------
+chapter 3
+Admin and Apps - Django Web Development with Python p.3
+--------------------------------------------------------
+
+
+τωρα παμε να δημιουργησουμε εναν superuser " python manage.py createsuperuser "
+μετα παμε στο " admin.py  " θεση " C:\Users\user\Documents\spotting\project\spotting_v1\main_v1 "
+και κανουμε import το μοντελο που φτιαξαμε στα models " Tutorial "
+" from .models import Tutorial "
+
+
+---------------------------
+admin.py
+
+from django.contrib import admin
+from .models import Tutorial
+# Register your models here.
+
+admin.site.register(Tutorial)....αυτο θα προσθεσει τα Tutorial στην admin page
+---------------------------
+
+
+
+---------------------------
+admin.py.....v2
+
+from django.contrib import admin
+from .models import Tutorial
+# Register your models here.
+
+class TutorialAdmin(admin.ModelAdmin):
+    fieldsets = [
+        (["Title/date", {"fields": ["tutorial_title","tutorial_published"]}]),
+        ("Content",{"fields":["tutorial_content"]})
+
+
+    ] 
+               
+    
+
+admin.site.register(Tutorial)
+
+---------------------------
+
+
+τωρα ξαναπαμε στα models.py και προσθετουμε το 
+" from datetime import datetime "
+και προσθετουμε επισης το attribute " default=datetime.now() "
+στη γραμμη 
+" tutorial_published = models.DateTimeField("date published", default=datetime.now())  "
+
+και κλεινουμε με την εντολη "  python manage.py makemigrations " και " python manage.py migrate "
+
+----------------------------------------------------------
+C:\Users\user\Documents\spotting\project\spotting_v1>python manage.py makemigrations
+Migrations for 'main_v1':
+  main_v1\migrations\0002_alter_tutorial_tutorial_published.py
+    ~ Alter field tutorial_published on tutorial
+
+C:\Users\user\Documents\spotting\project\spotting_v1>
+----------------------------------------------------------
+
+
+----------------------------------------------------------
+C:\Users\user\Documents\spotting\project\spotting_v1>python manage.py migrate
+Operations to perform:
+  Apply all migrations: admin, auth, contenttypes, main_v1, sessions
+Running migrations:
+  Applying main_v1.0002_alter_tutorial_tutorial_published... OK
+
+C:\Users\user\Documents\spotting\project\spotting_v1>
+----------------------------------------------------------
+
+
+τωρα θα παμε να εγκαταστησουμε το tinymce4-lite του django  
+" pip install django-tinymce4-lite "
+
+
+--------------------------------------------------------------
+C:\Users\user\Documents\spotting\project\spotting_v1>pip install django-tinymce4-lite
+Collecting django-tinymce4-lite
+  Downloading django_tinymce4_lite-1.8.0-py3-none-any.whl.metadata (6.4 kB)
+Requirement already satisfied: Django>=1.11 in c:\users\user\appdata\local\programs\python\python313\lib\site-packages (from django-tinymce4-lite) (5.1.3)
+Collecting jsmin (from django-tinymce4-lite)
+  Downloading jsmin-3.0.1.tar.gz (13 kB)
+  Installing build dependencies ... done
+  Getting requirements to build wheel ... done
+  Preparing metadata (pyproject.toml) ... done
+Requirement already satisfied: asgiref<4,>=3.8.1 in c:\users\user\appdata\local\programs\python\python313\lib\site-packages (from Django>=1.11->django-tinymce4-lite) (3.8.1)
+Requirement already satisfied: sqlparse>=0.3.1 in c:\users\user\appdata\local\programs\python\python313\lib\site-packages (from Django>=1.11->django-tinymce4-lite) (0.5.1)
+Requirement already satisfied: tzdata in c:\users\user\appdata\local\programs\python\python313\lib\site-packages (from Django>=1.11->django-tinymce4-lite) (2024.2)
+Downloading django_tinymce4_lite-1.8.0-py3-none-any.whl (1.2 MB)
+   ---------------------------------------- 1.2/1.2 MB 6.9 MB/s eta 0:00:00
+Building wheels for collected packages: jsmin
+  Building wheel for jsmin (pyproject.toml) ... done
+  Created wheel for jsmin: filename=jsmin-3.0.1-py3-none-any.whl size=13802 sha256=077891157da5e6794711c5b91d5378e8c1ffdecf84f24ddc8ac3afe8241d3e67
+  Stored in directory: c:\users\user\appdata\local\pip\cache\wheels\1e\2a\ff\ded045dd0dbfe74a64fbc81a821a77ac383e2648b13b4c7f16
+Successfully built jsmin
+Installing collected packages: jsmin, django-tinymce4-lite
+Successfully installed django-tinymce4-lite-1.8.0 jsmin-3.0.1
+
+[notice] A new release of pip is available: 24.2 -> 24.3.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+--------------------------------------------------------------
+
+
+και πιο μετα παμε να προσθεσουμε την εφαρμογή στα installed apps στο αρχειο "settings.py"
+
+---------------------------
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'main_v1.apps.MainV1Config',
+    'tinymce4'
+]
+---------------------------
+
+και ακομα πιο μετα παμε να προσθεσουμε το tinymce4 στα Urls της θεσης
+" C:\Users\user\Documents\spotting\project\spotting_v1 "
+
+" path('tinymce/', include('tinymce.urls')), "
+
+αργοτερα θα προσθεσουμε επισης καποιες εντολες στο admin.py
+
+from tinymce.widgets import tinymce
+from django.db import models
+
+και 
+
+    formfield_overrides = {
+        models.TextField: {'widget': TinyMCE()} 
+    }
+
+
+
+καταληξαμε οτι για την ωρα δε χρειαζομαστε το "Tinymce"................
+
+
+
+--------------------------------------------------------
+chapter 4
+Views and Templates - Django Web Development with Python p.4
+--------------------------------------------------------
+
+
+τωρα θα παμε ν α φτιαξαμε την σελιδα html που θα μας φερει τα αποτελεσματα 
+εδω θα πραγματοποιήσουμε καπποιες αλλαγες στο αρχειο "views.py"
+
+
+πριν 
+--------------------------------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def homepage(request):
+    return HttpResponse("day 1")
+--------------------------------------------
+
+μετα
+--------------------------------------------
+from django.shortcuts import render
+from django.http import HttpResponse
+
+# Create your views here.
+def homepage(request):
+    return render(request=request,
+                  template_name="main/home.html",
+                  context={"tutorials": Tutorial.objects.all})
+
+--------------------------------------------
+
+οποτε γινεται κατανοητο οτι πρεπει να παμε να φτιαξουμε ενα φακελο "templates/main" στη θεση 
+" C:\Users\user\Documents\spotting\project\spotting_v1\main_v1 " 
+και εκει να φτιαξουμε τη σελιδουλα μας
+
+
+
+---------------------------------------------------------
+
+NameError at /
+
+name 'Tutorial' is not defined
+
+Request Method: 	GET
+Request URL: 	http://127.0.0.1:8000/
+Django Version: 	5.1.3
+Exception Type: 	NameError
+Exception Value: 	
+
+name 'Tutorial' is not defined
+
+Exception Location: 	C:\Users\user\Documents\spotting\project\spotting_v1\main_v1\views.py, line 8, in homepage
+Raised during: 	main_v1.views.homepage
+Python Executable: 	C:\Users\user\AppData\Local\Programs\Python\Python313\python.exe
+Python Version: 	3.13.0
+Python Path: 	
+
+['C:\\Users\\user\\Documents\\spotting\\project\\spotting_v1',
+ 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\python313.zip',
+ 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\DLLs',
+ 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\Lib',
+ 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313',
+ 'C:\\Users\\user\\AppData\\Local\\Programs\\Python\\Python313\\Lib\\site-packages']
+
+Server time: 	Sat, 09 Nov 2024 13:46:30 +0000
+
+---------------------------------------------------------
+
+αυτο συμβαινει επειδη δεν εχουε κανει Import τα tutorial στο views.py 
+" from .models import Tutorial "
