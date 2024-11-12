@@ -1,5 +1,20 @@
 
 
+commands collection
+
+1... C:\python\project>             pip install django
+2..  C:\python\project>             django-admin startproject spotting_v1 
+3..  C:\python\project>             cd spotting_v1
+4..  C:\python\project\spotting_v1> py manage.py startapp main_v1
+5..  C:\python\project\spotting_v1> py manage.py runserver
+6..  C:\python\project\spotting_v1> python manage.py makemigrations
+7..  C:\python\project\spotting_v1> python manage.py migrate
+8..  C:\python\project\spotting_v1> python manage.py createsuperuser
+9..  C:\python\project\spotting_v1> pip install django-tinymce4-lite
+(βεβαια καταληξαμε οτι για την ωρα δε χρειαζομαστε το "Tinymce"................)
+
+" https://git-scm.com/downloads/win "  git hub download
+
 ---------------------------------------------------
 chapter 1
 Django Web Development with Python Introduction 
@@ -492,3 +507,41 @@ Server time: 	Sat, 09 Nov 2024 13:46:30 +0000
 
 αυτο συμβαινει επειδη δεν εχουε κανει Import τα tutorial στο views.py 
 " from .models import Tutorial "
+
+
+περαιτερω σημειωσεις 
+python check for parking on specific road through satelite
+
+
+Using the Geolocation API
+(https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API/Using_the_Geolocation_API)
+
+How to find closest marker leaflet.js
+(https://stackoverflow.com/questions/22622814/how-to-find-closest-marker-leaflet-js)
+
+How to get country from Javascript Geolocation API or similar on a web page?
+(https://softwarerecs.stackexchange.com/questions/87717/how-to-get-country-from-javascript-geolocation-api-or-similar-on-a-web-page)
+
+Add geography entries by Lattitude and Longitude
+(https://forum.bubble.io/t/add-geography-entries-by-lattitude-and-longitude/25683)
+
+Parking_Helper
+(https://github.com/vdmondkr2002/Parking_Helper)
+
+using latitude and longitude to visualize location over a web page
+(https://stackoverflow.com/questions/44111384/using-latitude-and-longitude-to-visualize-location-over-a-web-page)
+
+OPENCV, How to detect parking spots
+(https://stackoverflow.com/questions/77564372/opencv-how-to-detect-parking-spots).....good
+
+Snagging Parking Spaces with Mask R-CNN and Python
+(https://medium.com/@ageitgey/snagging-parking-spaces-with-mask-r-cnn-and-python-955f2231c400).....good
+
+
+Parking-Detector
+(https://github.com/eitan-ker/Parking-Detector)
+
+Smart Parking System using Python and OpenCV
+(https://www.ijraset.com/research-paper/smart-parking-system-using-python-and-opencv)
+
+
